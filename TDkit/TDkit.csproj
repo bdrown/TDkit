@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
-    <PackageReference Include="ThermoRawFileReader" Version="3.0.47.1" />
   </ItemGroup>
 
   <ItemGroup>

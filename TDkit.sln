@@ -10,7 +10,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDkitTest", "TDkitTest\TDki
 		{7CFD9747-7ED0-48DE-B835-E17DB1B597DD} = {7CFD9747-7ED0-48DE-B835-E17DB1B597DD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PfRMruler", "PfRMruler\PfRMruler.csproj", "{F051BBA9-2B27-48D2-A79C-A9C3B2A2AD48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PfRMruler", "PfRMruler\PfRMruler.csproj", "{F051BBA9-2B27-48D2-A79C-A9C3B2A2AD48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDE00683-7C59-4DAF-92AC-32DF88E38F68}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
