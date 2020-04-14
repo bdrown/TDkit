@@ -1,5 +1,13 @@
 # TDkit
 
-[![Build Status](https://travis-ci.com/bdrown/TDkit.svg?token=nW3s1WqrpGx8m3s2Pwu2&branch=master)](https://travis-ci.com/bdrown/TDkit)
+[![Build Status](https://travis-ci.org/bdrown/TDkit.svg?branch=master)](https://travis-ci.org/bdrown/TDkit)
 
 Software dev kit for handling and analyzing top-down mass spectrometry data
+
+## Do we need another top-down proteomics dev kit?
+
+Probably not. There are already some full-featured devkits out there. I'm in the process of learning C# and thought this would be a decent place to start.
+To list a few decent SDKs:
+
+* [Consortium for Top-Down Proteomics Software Development Kit (SDK)](https://github.com/topdownproteomics/sdk)
+* [mzLib](https://github.com/smith-chem-wisc/mzLib)
