@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
-using System.Linq;
 using TDkit;
 
 namespace TDkitTest
@@ -21,19 +20,19 @@ namespace TDkitTest
         {
             List<Isotope> n_dist = new List<Isotope>()
             {
-                new Isotope(14, 14.00307400443, 0.99636),
-                new Isotope(15, 15.00010889888, 0.00364)
+                new Isotope(7, 14, 14.00307400443, 0.99636),
+                new Isotope(7, 15, 15.00010889888, 0.00364)
             };
-            nitrogen = new Element("N", "Nitrogen", 5, n_dist);
+            nitrogen = new Element("N", 5, n_dist);
 
             List<Isotope> fe_dist = new List<Isotope>()
             {
-                new Isotope(54, 53.93960899, 0.05845),
-                new Isotope(56, 55.93493633, 0.91754),
-                new Isotope(57, 56.93539284, 0.02119),
-                new Isotope(58, 57.93327443, 0.00282)
+                new Isotope(26, 54, 53.93960899, 0.05845),
+                new Isotope(26, 56, 55.93493633, 0.91754),
+                new Isotope(26, 57, 56.93539284, 0.02119),
+                new Isotope(26, 58, 57.93327443, 0.00282)
             };
-            iron = new Element("Fe", "Iron", 26, fe_dist);
+            iron = new Element("Fe", 26, fe_dist);
         }
 
         /// <summary>
@@ -80,14 +79,13 @@ namespace TDkitTest
         public void Valid_Symbol_Gives_Correct_Info_Carbon()
         {
             // Setup
-            string expectedName = "Carbon";
             string expectedSymbol = "C";
             double expectedMonoMass = 12.0;
             Element ele = Element.GetElementFromSymbol(expectedSymbol);
 
             // Assertions
-            Assert.AreEqual<string>(expectedName, ele.Name);
-            Assert.AreEqual<double>(expectedMonoMass, ele.MonoisotopicMass());           
+            Assert.AreEqual<double>(expectedMonoMass, ele.MonoisotopicMass());
+            Assert.AreEqual<int>(6, ele.AtomicNumber);
         }
 
         /// <summary>
@@ -98,14 +96,13 @@ namespace TDkitTest
         public void Valid_Symbol_Give_Correct_Info_Iron()
         {
             // Setup
-            string expectedName = "Iron";
             string expectedSymbol = "Fe";
             double expectedMonoMass = 55.93493633;
             Element ele = Element.GetElementFromSymbol(expectedSymbol);
 
             // Assertions
-            Assert.AreEqual<string>(expectedName, ele.Name);
             Assert.AreEqual<double>(expectedMonoMass, ele.MonoisotopicMass());
+            Assert.AreEqual<int>(26, ele.AtomicNumber);
         }
 
         /// <summary>

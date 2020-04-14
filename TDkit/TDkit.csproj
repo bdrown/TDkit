@@ -5,15 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Residue.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="ElementData.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="ElementData.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
