@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Reflection;
 using System.Linq;
 
 namespace TDkit
@@ -114,12 +115,16 @@ namespace TDkit
         /// </summary>
         /// <param name="fileName">Path to Json file containing element data</param>
         /// <returns></returns>
-        private static List<Element> CreateElements(string fileName = "ElementData.txt")
+        private static List<Element> CreateElements()
         {
             List<Element> toReturn = new List<Element>();
 
             //   Data obtained from NIST https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ele=&ascii=ascii&isotype=all
-            using (StringReader sr = new StringReader(File.ReadAllText(fileName)))
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "TDkit.ElementData.txt";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader sr = new StreamReader(stream))
             {
                 string line;
                 string currentSymbol = "";
