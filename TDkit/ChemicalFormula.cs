@@ -44,7 +44,7 @@ namespace TDkit
             // TODO: provide support for condensed formula or repeated elements
             // TODO: provide support for recognizing isotope enriched elements
             // Regex recognizes a capital letter followed one or none lower case letter and one or none number
-            MatchCollection matches = Regex.Matches(chemForma, @"([A-Z][a-z]?)(\d*)");
+            MatchCollection matches = Regex.Matches(chemForma, @"([A-Z][a-z]?)(-?\d*)");
             Dictionary<Element, int> toReturn = new Dictionary<Element, int>();
 
             foreach (Match m in matches)

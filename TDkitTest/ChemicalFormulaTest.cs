@@ -102,6 +102,22 @@ namespace TDkitTest
         }
 
         [TestMethod]
+        public void Empty_String()
+        {
+            string formula = "";
+            var chem = new ChemicalFormula(formula);
+            Assert.AreEqual(0, chem.AverageMass());
+        }
+
+        [TestMethod]
+        public void Negative_Formula_Gives_Negative_Mass()
+        {
+            string formula = "C-6H-12O-6";
+            var chem = new ChemicalFormula(formula);
+            Assert.AreEqual(-180.15600, chem.AverageMass(), 0.0002);
+        }
+
+        [TestMethod]
         public void Unknown_Symbol_Raises_Exception()
         {
             string invalid = "C5RH12";
