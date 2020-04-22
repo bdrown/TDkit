@@ -8,34 +8,8 @@ namespace TDkit
     /// <summary>
     /// Basic implementation of a Proteoform. Contains a base sequence and indexed modifications.
     /// </summary>
-    public class Proteoform
+    public class Proteoform : Polymer
     {
-        /// <summary>
-        /// String containing the base sequence of the proteoform.
-        /// </summary>
-        public string Sequence { get; }
-
-        /// <summary>
-        /// Collection of the residues that make up the proteoform.
-        /// </summary>
-        private List<Residue> residues;
-
-        /// <summary>
-        /// Collection of chemical modifications on residues. Keys provide location of mod in sequence.
-        /// Key 0 provides N-terminal modification and key -1 provides C-terminal modification.
-        /// </summary>
-        private List<Modification> residueMods;
-
-        /// <summary>
-        /// Number of residues that make up the proteoform
-        /// </summary>
-        public int Length {
-            get
-            {
-                return residues.Count;
-            }
-        }
-
         /// <summary>
         /// Initializes an instance of Proteoform from ProForma string.
         /// </summary>
@@ -48,31 +22,6 @@ namespace TDkit
             this.residueMods = results.Mods;
         }
 
-        /// <summary>
-        /// Provides the number of residues of a particular type.
-        /// </summary>
-        /// <param name="symbol">One-character symbol of residue to count</param>
-        /// <returns>Number of occurances of a residue</returns>
-        public int ResidueCount(char symbol)
-        {
-            int count = 0;
-            foreach (char c in Sequence)
-            {
-                if (c == symbol) count++;
-            }
-            return count;
-        }
-
-        /// <summary>
-        /// Provides the total number of modifications on proteoform. Total 
-        /// does not include the default N- and C-terminal modifications (NH2- and -CO2H).
-        /// </summary>
-        /// <returns></returns>
-        public int NumMods()
-        {
-            // Don't count the default N- and C-terminal mods
-            return residueMods.Count - 2;
-        }
 
         /// <summary>
         /// ProForma parser with limited functionality. Will look for tags 
@@ -81,7 +30,7 @@ namespace TDkit
         /// </summary>
         /// <param name="proForma"></param>
         /// <returns></returns>
-        public static (string BaseSequence, List<Residue> Residues, List<Modification> Mods) ParseProForma(string proForma)
+        private static (string BaseSequence, List<Residue> Residues, List<Modification> Mods) ParseProForma(string proForma)
         {
             StringBuilder sequence = new StringBuilder();
             StringBuilder tag = new StringBuilder();
@@ -142,31 +91,6 @@ namespace TDkit
             return (sequence.ToString(), residues, mods);
         }
 
-        /// <summary>
-        /// Provides the monoisotopic mass of a proteoform.
-        /// </summary>
-        /// <returns>Monoisotopic mass</returns>
-        public double MonoisotopicMass()
-        {
-            // Sum mass of base sequence
-            double mass = residues.Sum(residue => residue.MonoisotopicMass());
 
-            // Sum mass of all modifications
-            mass += residueMods.Sum(mod => mod.MonoisotopicMass());
-
-            return mass;
-        }
-
-        /// <summary>
-        /// Provides the average mass of a proteoform.
-        /// </summary>
-        /// <returns>Average mass</returns>
-        public double AverageMass()
-        {
-            double mass = residues.Sum(residue => residue.AverageMass());
-            mass += residueMods.Sum(mod => mod.AverageMass());
-
-            return mass;
-        }
     }
 }
