@@ -35,21 +35,41 @@ namespace TDkit
 
         /// <summary>
         /// Parses a chemical formula in Hill notation into a dictionary containing the count of each element.
-        /// Does not support par
+        /// Does not support condensed formula, repeated elements, or specific isotopes.
         /// </summary>
         /// <param name="chemForma">Chemical formula in Hill notation or chemForma</param>
-        /// <returns></returns>
+        /// <returns>Dictionary of Elements that relates identity of element with cardinality.</returns>
         public static Dictionary<Element, int> ParseChemForma(string chemForma)
         {
             // TODO: provide support for condensed formula or repeated elements
             // TODO: provide support for recognizing isotope enriched elements
-            // Regex recognizes a capital letter followed one or none lower case letter and one or none number
-            MatchCollection matches = Regex.Matches(chemForma, @"([A-Z][a-z]?)(\d*)");
+
             Dictionary<Element, int> toReturn = new Dictionary<Element, int>();
+
+            // In case of empty string, just return empty dictionary of elements
+            if (String.IsNullOrEmpty(chemForma))
+                return toReturn;
+
+            // Perform some error-checking
+            // Lower case immediately following digit
+            var match = Regex.Match(chemForma, @"\d*[a-z]");
+            if (match.Success)
+                throw new ArgumentException($"Invalid Element symbol. Must be upper case: {chemForma}", "chemForma");
+
+            // Regex recognizes a capital letter followed one or none lower case letter and one or none number
+            MatchCollection matches = Regex.Matches(chemForma, @"([A-Z][a-z]?)(-?\d*)");
+
+            // In this case, the string is not empty but the string is not formated like a formula
+            if (matches.Count == 0)
+                throw new ArgumentException($"No matches were found in formula: {chemForma}", "chemForma");
 
             foreach (Match m in matches)
             {
+                // Each match contains two groups. The first group contains the element symbol
                 var symbol = m.Groups[1].Value;
+
+                // The second group contains the cardinality of the element. If no number is matched,
+                // then assume one atom.
                 var cardinality = String.IsNullOrEmpty(m.Groups[2].Value) ? "1" : m.Groups[2].Value;
 
                 toReturn.Add(Element.GetElementFromSymbol(symbol), Int32.Parse(cardinality));
