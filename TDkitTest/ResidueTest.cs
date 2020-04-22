@@ -26,7 +26,7 @@ namespace TDkitTest
         [TestMethod]
         public void Calc_Avg_Mass()
         {
-            Assert.AreEqual(71.07794, alanine.AverageMass(), 0.000001);
+            Assert.AreEqual(71.07794, alanine.AverageMass(), 0.01);
         }
 
         [TestMethod]

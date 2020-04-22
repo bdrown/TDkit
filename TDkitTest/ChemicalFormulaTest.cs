@@ -154,7 +154,7 @@ namespace TDkitTest
         {
             // Obtained from PubChem
             Assert.AreEqual(1982.142529, ubiquitin.MonoisotopicMass(), 0.00002);
-            Assert.AreEqual(1983.34, ubiquitin.AverageMass(), 0.01);
+            Assert.AreEqual(1983.34, ubiquitin.AverageMass(), 0.1);
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace TDkitTest
         { 
             // Carbonic - mMass results
             Assert.AreEqual(28852.3882, carbonic.MonoisotopicMass(), 0.0001);
-            Assert.AreEqual(28869.9095, carbonic.AverageMass(), 0.001);
+            Assert.AreEqual(28869.9095, carbonic.AverageMass(), 0.1);
         }
     }
 }
