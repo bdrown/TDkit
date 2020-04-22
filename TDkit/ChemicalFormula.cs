@@ -43,9 +43,19 @@ namespace TDkit
         {
             // TODO: provide support for condensed formula or repeated elements
             // TODO: provide support for recognizing isotope enriched elements
+
+            // Perform some error-checking
+            // Lower case immediately following digit
+            var match = Regex.Match(chemForma, @"\d*[a-z]");
+            if (match.Success)
+                throw new ArgumentException($"Invalid Element symbol. Must be upper case: {chemForma}", "chemForma");
+
             // Regex recognizes a capital letter followed one or none lower case letter and one or none number
             MatchCollection matches = Regex.Matches(chemForma, @"([A-Z][a-z]?)(-?\d*)");
             Dictionary<Element, int> toReturn = new Dictionary<Element, int>();
+
+            if (matches.Count == 0)
+                throw new ArgumentException($"No matches were found in formula: {chemForma}", "chemForma");
 
             foreach (Match m in matches)
             {
