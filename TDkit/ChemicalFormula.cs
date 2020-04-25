@@ -116,5 +116,10 @@ namespace TDkit
         {
             return elements.Sum(element => element.Key.AverageMass() * element.Value);
         }
+
+        public Dictionary<Element, int> GetElements()
+        {
+            return elements;
+        }
     }
 }

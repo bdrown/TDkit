@@ -17,6 +17,12 @@ namespace TDkit
         /// using CreateElements method.
         /// </summary>
         private static List<Element> elementData = CreateElements();
+
+        /// <summary>
+        /// Collection that contains data for all possible isotopes of the element.
+        /// This collection even contains isotopes with zero abundance.
+        /// </summary>
+        private List<Isotope> fullIsotopeDistribution;
         
         /// <summary>
         /// Element symbol (e.g. C).
@@ -31,7 +37,17 @@ namespace TDkit
         /// <summary>
         /// Collection of isotopes that exist for this element
         /// </summary>
-        public List<Isotope> IsotopeDistribution { get; }
+        public List<Isotope> IsotopeDistribution {
+            get
+            {
+                // Just return the isotopes that have some abundance
+                IEnumerable<Isotope> toReturn =
+                from isotope in fullIsotopeDistribution
+                where isotope.Abundance > 0
+                select isotope;
+                return toReturn.ToList();
+            }
+        }
         
         /// <summary>
         /// Initializes an instance of Element
@@ -44,7 +60,7 @@ namespace TDkit
         {
             this.Symbol = symbol;
             this.AtomicNumber = atomicNumber;
-            this.IsotopeDistribution = isotopes;
+            this.fullIsotopeDistribution = isotopes;
         }
 
         /// <summary>
@@ -106,6 +122,20 @@ namespace TDkit
 
             // Return mass of first isotope with max abundance
             return this.IsotopeDistribution.First(isotope => isotope.Abundance == max).RelativeAtomicMass;
+        }
+
+        /// <summary>
+        /// Calculate the difference in neutron count between lightest and heaviest isotope
+        /// that is abundant.
+        /// </summary>
+        /// <returns>Max number of added neutrons</returns>
+        public int MaxNeutronShift()
+        {
+            IEnumerable<int> aWeights =
+                from isotope in fullIsotopeDistribution
+                where isotope.Abundance > 0
+                select isotope.AtomicWeight;
+            return aWeights.Max() - aWeights.Min();
         }
 
         /// <summary>

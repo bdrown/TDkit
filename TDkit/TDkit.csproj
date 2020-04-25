@@ -10,4 +10,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ThermoRawFileReader" Version="3.0.47.1" />
+  </ItemGroup>
+
 </Project>
