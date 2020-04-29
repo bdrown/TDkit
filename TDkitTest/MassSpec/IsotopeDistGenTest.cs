@@ -70,5 +70,34 @@ namespace TDkitTest.MassSpec
                 Assert.AreEqual(ca_ref.Intensities[i], ca_mercury.Intensities[i+4], 0.01);
             }
         }
+
+        [TestMethod]
+        public void Brain_HexNAc()
+        {
+            IIsotopeDistGenerator gen = new Brain();
+
+            IsotopicDistribution hexnac_mercury = gen.GenerateIsotopicDistribution(hexnac_form);
+
+            for (int i = 0; i < hexnac_ref.Length; i++)
+            {
+                Assert.AreEqual(hexnac_ref.Masses[i], hexnac_mercury.Masses[i], 0.001);
+                Assert.AreEqual(hexnac_ref.Intensities[i], hexnac_mercury.Intensities[i], 0.001);
+            }
+        }
+
+        [TestMethod]
+        public void Brain_Carbonic()
+        {
+            IIsotopeDistGenerator gen = new Brain();
+
+            IsotopicDistribution ca_brain = gen.GenerateIsotopicDistribution(ca_form);
+
+            for (int i = 0; i < ca_ref.Length; i++)
+            {
+                // mMass doesn't calculate the intensity of the monoisotopic mass peak so need to offset by 4
+                Assert.AreEqual(ca_ref.Masses[i], ca_brain.Masses[i + 4], 0.01);
+                Assert.AreEqual(ca_ref.Intensities[i], ca_brain.Intensities[i + 4], 0.01);
+            }
+        }
     }
 }

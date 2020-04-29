@@ -30,6 +30,22 @@ namespace TDkit
         public double Abundance { get;}
 
         /// <summary>
+        /// The number of neutrons in this isotope.
+        /// </summary>
+        public int Neutrons
+        {
+            get
+            {
+                return AtomicWeight - AtomicNumber;
+            }
+        }
+
+        /// <summary>
+        /// Difference in neutrons from most abundant isotope
+        /// </summary>
+        public int NeutronShift { get; set; }
+
+        /// <summary>
         /// Initializes an instance of the Isotope class.
         /// </summary>
         /// <param name="atomicWeight">The atomic weight.</param>
@@ -41,6 +57,16 @@ namespace TDkit
             this.AtomicWeight = atomicWeight;
             this.RelativeAtomicMass = relativeAtomicMass;
             this.Abundance = abundance;
+        }
+
+        /// <summary>
+        /// Sets the number of additional neutrons in isotope compared to "typical"
+        /// isotope, which most frequently refers to the most abundant species.
+        /// </summary>
+        /// <param name="typical">Number of neutrons in typical isotope</param>
+        public void SetNeutronShift(int typical)
+        {
+            this.NeutronShift = this.Neutrons - typical;
         }
 
         /// <summary>

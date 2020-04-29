@@ -61,6 +61,25 @@ namespace TDkit
             this.Symbol = symbol;
             this.AtomicNumber = atomicNumber;
             this.fullIsotopeDistribution = isotopes;
+            UpdateNeutronShifts();
+        }
+
+        /// <summary>
+        /// After an element has been instantiated, determine the typical number
+        /// of neutrons and update the shifts for each isotope.
+        /// </summary>
+        private void UpdateNeutronShifts()
+        {
+            // Find max abundance
+            double max = this.fullIsotopeDistribution.Max(isotope => isotope.Abundance);
+
+            // Return number of neutrons of first isotope with max abundance
+            int typical = this.fullIsotopeDistribution.First(isotope => isotope.Abundance == max).Neutrons;
+
+            foreach (Isotope iso in this.fullIsotopeDistribution)
+            {
+                iso.SetNeutronShift(typical);
+            }
         }
 
         /// <summary>
