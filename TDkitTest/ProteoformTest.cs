@@ -54,5 +54,23 @@ namespace TDkitTest
             // Value calculated in ProSightLite
             Assert.AreEqual(11299.38, h4.MonoisotopicMass(), 0.01);
         }
+
+        [TestMethod]
+        public void Provide_Simple_Formula()
+        {
+            // Expected value calculated using ProtParam
+            Assert.AreEqual("C769H1212N210O218S2", myo.GetFormula().ToString());
+        }
+
+        [TestMethod]
+        public void Provide_Modification_Formula()
+        {
+            // Base sequence formula from ProtParam: C494H837N163O134S1
+            // Plus acetyl: C2H2O
+            // Plus dimetyhl: C2H4
+            // Total: C498H843N163O135S1
+            Assert.AreEqual("C498H843N163O135S", h4.GetFormula().ToString());
+        }
+
     }
 }

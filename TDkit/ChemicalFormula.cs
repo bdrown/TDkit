@@ -34,6 +34,14 @@ namespace TDkit
         }
 
         /// <summary>
+        /// Empty initializer for a chemical formula with no atoms
+        /// </summary>
+        public ChemicalFormula()
+        {
+            this.elements = new Dictionary<Element, int>();
+        }
+
+        /// <summary>
         /// Parses a chemical formula in Hill notation into a dictionary containing the count of each element.
         /// Does not support condensed formula, repeated elements, or specific isotopes.
         /// </summary>
@@ -120,6 +128,28 @@ namespace TDkit
         public Dictionary<Element, int> GetElements()
         {
             return elements;
+        }
+
+        /// <summary>
+        /// Merge with another chemical formula
+        /// </summary>
+        /// <param name="other">The other formula to merge with</param>
+        public void Merge(ChemicalFormula other)
+        {
+            // Iterate through elements in the other formula, find matches, and update
+            foreach (var kvp in other.GetElements())
+            {
+                if (this.elements.ContainsKey(kvp.Key))
+                {
+                    // If this formula already contains the element, add to count
+                    this.elements[kvp.Key] += kvp.Value;
+                }
+                else
+                {
+                    // IF this formula does not contain the element, append key value pair
+                    this.elements.Add(kvp.Key, kvp.Value);
+                }
+            }
         }
     }
 }

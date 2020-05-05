@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TDkit.MassSpec
 {
@@ -67,11 +65,19 @@ namespace TDkit.MassSpec
         /// </summary>
         public int Length => mz.Length;
 
+        /// <summary>
+        /// Provides the intensity data in the spectrum
+        /// </summary>
+        /// <returns></returns>
         public double[] GetIntensity()
         {
             return intensity;
         }
 
+        /// <summary>
+        /// Provides the m/z data in the spectrum
+        /// </summary>
+        /// <returns></returns>
         public double[] GetMz()
         {
             return mz;

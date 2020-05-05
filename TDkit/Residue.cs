@@ -58,6 +58,15 @@ namespace TDkit
         }
 
         /// <summary>
+        /// Provides the chemical formula of the Residue
+        /// </summary>
+        /// <returns></returns>
+        public ChemicalFormula GetFormula()
+        {
+            return baseFormula;
+        }
+
+        /// <summary>
         /// Gets the residue using one character symbol
         /// </summary>
         /// <param name="symbol">Symbol of the residue</param>

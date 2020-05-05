@@ -34,5 +34,14 @@ namespace TDkit
             this.Name = words[0];
             this.formula = new ChemicalFormula(words[1].Split(':')[1]);
         }
+
+        /// <summary>
+        /// Provides the chemical formula of the modification
+        /// </summary>
+        /// <returns></returns>
+        public ChemicalFormula GetFormula()
+        {
+            return formula;
+        }
     }
 }
