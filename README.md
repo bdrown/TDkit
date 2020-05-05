@@ -1,6 +1,7 @@
 # TDkit
 
 [![Build Status](https://travis-ci.org/bdrown/TDkit.svg?branch=master)](https://travis-ci.org/bdrown/TDkit)
+[![Coverage Status](https://coveralls.io/repos/github/bdrown/TDkit/badge.svg?branch=master)](https://coveralls.io/github/bdrown/TDkit?branch=master)
 
 Software dev kit for handling and analyzing top-down mass spectrometry data
 
