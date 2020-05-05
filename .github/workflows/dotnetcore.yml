@@ -24,7 +24,7 @@ jobs:
     - name: Test with coverage
       run: |
         cd ./TDkitTest
-        dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults\TestResults /p:CoverletOutputFormat=lcov
+        dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.1.1
       with:
