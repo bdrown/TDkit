@@ -21,9 +21,12 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+    - name: Test with coverage
+      run: |
+        cd ./TDkitTest
+        dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults\TestResults /p:CoverletOutputFormat=lcov
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.1.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./TDkitTest/TestResults/coverage.info
