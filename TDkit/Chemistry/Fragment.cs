@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     /// <summary>
     /// Basic implementation of a Fragment.

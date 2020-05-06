@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class Modification
     {

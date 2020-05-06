@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TDkit.MassSpec;
-using TDkit;
+using TDkit.Chemistry;
 
 namespace TDkitTest.MassSpec
 {

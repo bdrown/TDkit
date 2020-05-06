@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class ChemicalFormula
     {

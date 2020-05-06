@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Linq;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     /// <summary>
     /// Basic implementation of an element
@@ -151,7 +151,7 @@ namespace TDkit
 
             //   Data obtained from NIST https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ele=&ascii=ascii&isotype=all
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "TDkit.ElementData.txt";
+            var resourceName = "TDkit.Chemistry.ElementData.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader sr = new StreamReader(stream))

@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     /// <summary>
     /// Basic implementation of a Proteoform. Contains a base sequence and indexed modifications.
