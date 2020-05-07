@@ -26,9 +26,10 @@ namespace TDkit.MassSpec
             return this.Mercury(formula, this.limit);
         }
 
-        public ChargedIsotopicDistribution GenerateChargeIsotopicDistribution(ChemicalFormula formula, int charge)
+        public ChargedIsotopicDistribution GenerateChargedIsotopicDistribution(ChemicalFormula formula, int charge)
         {
-            throw new NotImplementedException();
+            IsotopicDistribution dist = this.Mercury(formula, this.limit);
+            return dist.CreateChargedDist(charge);
         }
 
         private IsotopicDistribution Mercury(ChemicalFormula formula, double limit)

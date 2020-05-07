@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TDkit.MassSpec;
 using TDkit.Chemistry;
+using System;
+using System.Collections.Generic;
 
 namespace TDkitTest.MassSpec
 {
@@ -69,6 +71,38 @@ namespace TDkitTest.MassSpec
                 Assert.AreEqual(ca_ref.Masses[i], ca_mercury.Masses[i+4], 0.01);
                 Assert.AreEqual(ca_ref.Intensities[i], ca_mercury.Intensities[i+4], 0.01);
             }
+        }
+
+        [TestMethod]
+        public void Valid_Data_Generates_Valid_Dist()
+        {
+            double[] mass = new double[] { 203.079373, 204.082545, 205.084190, 206.086971 };
+            double[] intensity = new double[] { 0.901867, 0.084396, 0.012787, 0.000950 };
+
+            IsotopicDistribution dist = new IsotopicDistribution(mass, intensity);
+
+            Assert.AreEqual(4, dist.Length);
+        }
+
+        [TestMethod]
+        public void Valid_Data_Generates_Valid_Dist_From_Lists()
+        {
+            List<double> mass = new List<double> { 203.079373, 204.082545, 205.084190, 206.086971 };
+            List<double> intensity = new List<double> { 0.901867, 0.084396, 0.012787, 0.000950 };
+
+            IsotopicDistribution dist = new IsotopicDistribution(mass, intensity);
+
+            Assert.AreEqual(4, dist.Length);
+        }
+
+        [TestMethod]
+        public void Invalid_Data_Generates_Error()
+        {
+            double[] mass = new double[] { 203.079373, 204.082545, 205.084190, 206.086971 };
+            double[] intensity = new double[] { 0.901867, 0.084396, 0.012787 };
+
+            IsotopicDistribution dist;
+            Assert.ThrowsException<ArgumentException>(() => dist = new IsotopicDistribution(mass, intensity));
         }
     }
 }

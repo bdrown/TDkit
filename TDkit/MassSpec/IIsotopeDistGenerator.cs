@@ -9,7 +9,7 @@ namespace TDkit.MassSpec
     {
         IsotopicDistribution GenerateIsotopicDistribution(ChemicalFormula formula);
 
-        ChargedIsotopicDistribution GenerateChargeIsotopicDistribution(ChemicalFormula formula, int charge);
+        ChargedIsotopicDistribution GenerateChargedIsotopicDistribution(ChemicalFormula formula, int charge);
 
     }
 }

@@ -69,7 +69,7 @@ namespace TDkit.MassSpec
         /// Provides the intensity data in the spectrum
         /// </summary>
         /// <returns></returns>
-        public double[] GetIntensity()
+        public IList<double> GetIntensity()
         {
             return intensity;
         }
@@ -78,7 +78,7 @@ namespace TDkit.MassSpec
         /// Provides the m/z data in the spectrum
         /// </summary>
         /// <returns></returns>
-        public double[] GetMz()
+        public IList<double> GetMz()
         {
             return mz;
         }

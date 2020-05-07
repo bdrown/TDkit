@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TDkit.MassSpec
 {
@@ -23,13 +21,13 @@ namespace TDkit.MassSpec
         /// Array of m/z values
         /// </summary>
         /// <returns></returns>
-        double[] GetMz();
+        IList<double> GetMz();
 
         /// <summary>
         /// Array of intensity values
         /// </summary>
         /// <returns></returns>
-        double[] GetIntensity();
+        IList<double> GetIntensity();
 
         /// <summary>
         /// Length of data or number of data points
