@@ -6,7 +6,7 @@ namespace TDkit.MassSpec
     /// <summary>
     /// Base class for representing a chromatogram
     /// </summary>
-    class Chromatogram
+    public class Chromatogram
     {
         /// <summary>
         /// Times that data was collected at.
@@ -21,12 +21,18 @@ namespace TDkit.MassSpec
 
         public Chromatogram(double[] time, double[] intensity)
         {
+            if (time.Length != intensity.Length)
+                throw new ArgumentException("Length of time and intensity data must match from Chromatogram");
+
             this.time = time;
             this.intensity = intensity;
         }
 
         public Chromatogram(List<double> time, List<double> intensity)
         {
+            if (time.Count != intensity.Count)
+                throw new ArgumentException("Length of time and intensity data must match from Chromatogram");
+
             this.time = time.ToArray();
             this.intensity = intensity.ToArray();
         }
