@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TDkit.MassSpec
 {
-    class Spectrum : IMzData
+    public class Spectrum : IMzData
     {
         private readonly double[] mz;
         private readonly double[] intensity;
@@ -14,6 +15,9 @@ namespace TDkit.MassSpec
         /// <param name="intensity">Array of intensity data</param>
         public Spectrum(double[] mz, double[] intensity, double rt = 0.0, int MSLevel = 1, double precursor = 0.0)
         {
+            if (mz.Length != intensity.Length)
+                throw new ArgumentException("Lengths of mz and intensity data do not match");
+
             this.intensity = intensity;
             this.mz = mz;
             this.RetentionTime = rt;
@@ -28,6 +32,9 @@ namespace TDkit.MassSpec
         /// <param name="intensity">List of intensity data</param>
         public Spectrum(List<double> mz, List<double> intensity, double rt = 0.0, int MSLevel = 1, double precursor = 0.0)
         {
+            if (mz.Count != intensity.Count)
+                throw new ArgumentException("Lengths of mz and intensity data do not match");
+
             this.intensity = intensity.ToArray();
             this.mz = mz.ToArray();
             this.RetentionTime = rt;

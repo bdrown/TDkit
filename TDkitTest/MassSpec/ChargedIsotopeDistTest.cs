@@ -1,22 +1,28 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TDkit.MassSpec;
 using TDkit.Chemistry;
+using System;
 
 namespace TDkitTest.MassSpec
 {
     [TestClass]
     public class ChargedIsotopeDistTest
     {
+        ChargedIsotopicDistribution hexnac_ref;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            // Testing data generated with mMass
+            double[] mass = new double[] { 204.0866, 205.0899, 206.0915, 207.0942 };
+            double[] intensity = new double[] { 0.901867, 0.084396, 0.012787, 0.000950 };
+            hexnac_ref = new ChargedIsotopicDistribution(mass, intensity, 1);
+        }
 
         [TestMethod]
         public void Test_Single_Charged_Distribution_HexNAc()
         {
             ChemicalFormula hexnac_form = new ChemicalFormula("C8H13N1O5");
-
-            // Testing data generated with mMass
-            double[] mass = new double[] { 204.0866, 205.0899, 206.0915, 207.0942 };
-            double[] intensity = new double[] { 0.901867, 0.084396, 0.012787, 0.000950 };
-            ChargedIsotopicDistribution hexnac_ref = new ChargedIsotopicDistribution(mass, intensity, 1);
 
             IIsotopeDistGenerator gen = new Mercury7();
 
@@ -89,6 +95,33 @@ namespace TDkitTest.MassSpec
                 Assert.AreEqual(ca_ref.GetMz()[i], ca_mercury.GetMz()[i + 4], 0.0001);
                 Assert.AreEqual(ca_ref.GetIntensity()[i], ca_mercury.GetIntensity()[i + 4], 0.01);
             }
+        }
+
+        [TestMethod]
+        public void Mismatched_Data_Lengths()
+        {
+            double[] mass = new double[] { 204.0866, 205.0899, 206.0915, 207.0942 };
+            double[] intensity = new double[] { 0.901867, 0.084396, 0.012787 };
+            ChargedIsotopicDistribution test;
+            Assert.ThrowsException<ArgumentException>(() => test = new ChargedIsotopicDistribution(mass, intensity, 1));
+        }
+
+        [TestMethod]
+        public void Gives_Charge()
+        {
+            Assert.AreEqual(1, hexnac_ref.Charge);
+        }
+
+        [TestMethod]
+        public void Gives_First_Mz()
+        {
+            Assert.AreEqual(204.0866, hexnac_ref.FirstMz);
+        }
+
+        [TestMethod]
+        public void Gives_Last_Mz()
+        {
+            Assert.AreEqual(207.0942, hexnac_ref.LastMz);
         }
     }
 }

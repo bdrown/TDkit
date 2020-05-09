@@ -79,7 +79,7 @@ namespace TDkit.MassSpec
                     continue;
 
                 // Determine if this index or the previous is closer
-                if (Math.Abs(diff) < this.time[i - 1] - time)
+                if (diff < Math.Abs(this.time[i - 1] - time))
                     return this.intensity[i];
                 else
                     return this.intensity[i - 1];
