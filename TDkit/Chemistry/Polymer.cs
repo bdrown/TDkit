@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class Polymer
     {
@@ -25,13 +25,7 @@ namespace TDkit
         /// <summary>
         /// Number of residues that make up the proteoform
         /// </summary>
-        public int Length
-        {
-            get
-            {
-                return residues.Count;
-            }
-        }
+        public int Length => residues.Count;
 
         /// <summary>
         /// Initializes an instance of Polymer from all private properties.
@@ -148,6 +142,30 @@ namespace TDkit
             mass += residueMods.Sum(mod => mod.AverageMass());
 
             return mass;
+        }
+
+        /// <summary>
+        /// Provides the combined chemical formula of the base sequence and all
+        /// of the modifications.
+        /// </summary>
+        /// <returns>Simplified ChemicalFormula for polymer</returns>
+        public ChemicalFormula GetFormula()
+        {
+            ChemicalFormula aggregator = new ChemicalFormula();
+
+            // Generate base formula
+            foreach (var res in this.residues)
+            {
+                aggregator.Merge(res.GetFormula());
+            }
+
+            // Add on all of the mods
+            foreach (var mod in this.residueMods)
+            {
+                aggregator.Merge(mod.GetFormula());
+            }
+
+            return aggregator;
         }
     }
 }

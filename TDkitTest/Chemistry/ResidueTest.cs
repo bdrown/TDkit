@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System;
-using TDkit;
+using TDkit.Chemistry;
 
-namespace TDkitTest
+namespace TDkitTest.Chemistry
 {
 
     [TestClass]

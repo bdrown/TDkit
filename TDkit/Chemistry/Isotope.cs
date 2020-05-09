@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     /// <summary>
     /// Representation of a single isotope of an element. Contains a unique atomic weight,

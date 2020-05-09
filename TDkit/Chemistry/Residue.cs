@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class Residue
     {
@@ -55,6 +55,15 @@ namespace TDkit
         public double AverageMass()
         {
             return baseFormula.AverageMass();
+        }
+
+        /// <summary>
+        /// Provides the chemical formula of the Residue
+        /// </summary>
+        /// <returns></returns>
+        public ChemicalFormula GetFormula()
+        {
+            return baseFormula;
         }
 
         /// <summary>

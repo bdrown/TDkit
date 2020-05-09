@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Linq;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     /// <summary>
     /// Basic implementation of an element
@@ -17,6 +17,12 @@ namespace TDkit
         /// using CreateElements method.
         /// </summary>
         private static List<Element> elementData = CreateElements();
+
+        /// <summary>
+        /// Collection that contains data for all possible isotopes of the element.
+        /// This collection even contains isotopes with zero abundance.
+        /// </summary>
+        private List<Isotope> fullIsotopeDistribution;
         
         /// <summary>
         /// Element symbol (e.g. C).
@@ -31,7 +37,17 @@ namespace TDkit
         /// <summary>
         /// Collection of isotopes that exist for this element
         /// </summary>
-        public List<Isotope> IsotopeDistribution { get; }
+        public List<Isotope> IsotopeDistribution {
+            get
+            {
+                // Just return the isotopes that have some abundance
+                IEnumerable<Isotope> toReturn =
+                from isotope in fullIsotopeDistribution
+                where isotope.Abundance > 0
+                select isotope;
+                return toReturn.ToList();
+            }
+        }
         
         /// <summary>
         /// Initializes an instance of Element
@@ -44,7 +60,7 @@ namespace TDkit
         {
             this.Symbol = symbol;
             this.AtomicNumber = atomicNumber;
-            this.IsotopeDistribution = isotopes;
+            this.fullIsotopeDistribution = isotopes;
         }
 
         /// <summary>
@@ -109,6 +125,20 @@ namespace TDkit
         }
 
         /// <summary>
+        /// Calculate the difference in neutron count between lightest and heaviest isotope
+        /// that is abundant.
+        /// </summary>
+        /// <returns>Max number of added neutrons</returns>
+        public int MaxNeutronShift()
+        {
+            IEnumerable<int> aWeights =
+                from isotope in fullIsotopeDistribution
+                where isotope.Abundance > 0
+                select isotope.AtomicWeight;
+            return aWeights.Max() - aWeights.Min();
+        }
+
+        /// <summary>
         /// Data about elements is loaded from txt file. Obtained from NIST accessed on April 9, 2020.
         /// https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ele=&all=all&ascii=ascii2&isotype=all
         /// All isotopes are used, even ones with no natural abundance.
@@ -121,7 +151,7 @@ namespace TDkit
 
             //   Data obtained from NIST https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ele=&ascii=ascii&isotype=all
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "TDkit.ElementData.txt";
+            var resourceName = "TDkit.Chemistry.ElementData.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader sr = new StreamReader(stream))

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class Modification
     {
@@ -33,6 +33,15 @@ namespace TDkit
             string[] words = tag.Split('|');
             this.Name = words[0];
             this.formula = new ChemicalFormula(words[1].Split(':')[1]);
+        }
+
+        /// <summary>
+        /// Provides the chemical formula of the modification
+        /// </summary>
+        /// <returns></returns>
+        public ChemicalFormula GetFormula()
+        {
+            return formula;
         }
     }
 }

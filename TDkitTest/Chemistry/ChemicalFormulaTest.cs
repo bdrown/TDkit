@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
-using System.Linq;
-using TDkit;
+using TDkit.Chemistry;
 
-namespace TDkitTest
+namespace TDkitTest.Chemistry
 {
     [TestClass]
     public class ChemicalFormulaTest

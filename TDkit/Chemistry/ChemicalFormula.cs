@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TDkit
+namespace TDkit.Chemistry
 {
     public class ChemicalFormula
     {
@@ -31,6 +31,14 @@ namespace TDkit
         public ChemicalFormula(string chemForma)
         {
             this.elements = ParseChemForma(chemForma);
+        }
+
+        /// <summary>
+        /// Empty initializer for a chemical formula with no atoms
+        /// </summary>
+        public ChemicalFormula()
+        {
+            this.elements = new Dictionary<Element, int>();
         }
 
         /// <summary>
@@ -115,6 +123,33 @@ namespace TDkit
         public double AverageMass()
         {
             return elements.Sum(element => element.Key.AverageMass() * element.Value);
+        }
+
+        public Dictionary<Element, int> GetElements()
+        {
+            return elements;
+        }
+
+        /// <summary>
+        /// Merge with another chemical formula
+        /// </summary>
+        /// <param name="other">The other formula to merge with</param>
+        public void Merge(ChemicalFormula other)
+        {
+            // Iterate through elements in the other formula, find matches, and update
+            foreach (var kvp in other.GetElements())
+            {
+                if (this.elements.ContainsKey(kvp.Key))
+                {
+                    // If this formula already contains the element, add to count
+                    this.elements[kvp.Key] += kvp.Value;
+                }
+                else
+                {
+                    // IF this formula does not contain the element, append key value pair
+                    this.elements.Add(kvp.Key, kvp.Value);
+                }
+            }
         }
     }
 }
